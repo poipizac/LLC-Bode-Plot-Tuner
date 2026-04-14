@@ -63,6 +63,7 @@ const App = () => {
   const [params, setParams] = useLocalStorage('llc-tuner-params-v1', DEFAULT_PARAMS);
   const [showSchematic, setShowSchematic] = useLocalStorage('llc-tuner-show-schematic', true);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Handle input changes
   const handleChange = (name, value) => {
@@ -298,8 +299,16 @@ const App = () => {
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>
+      {/* Mobile Toggle Button */}
+      <button 
+          className="mobile-toggle-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+          {isSidebarOpen ? 'Hide' : 'Params'}
+      </button>
+
       {/* Sidebar */}
-      <div className="sidebar">
+      <div className={`sidebar ${!isSidebarOpen ? 'collapsed' : ''}`}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
             <h2 style={{ fontSize: '1.1em', margin: 0 }}>NXP TEA19161T LLC Loop Tuner</h2>
             <button 
